@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -216,7 +217,7 @@ public class TestSeleniumDriver {
     public void elementProps2() throws InterruptedException {
 
         driver.get("https://the-internet.herokuapp.com/checkboxes");
-    Thread.sleep(3000);
+        Thread.sleep(3000);
         WebElement checkbox = driver.findElement(By.xpath("//form/input[1]"));
 
         // check if element is visible (for all elements)
@@ -228,6 +229,70 @@ public class TestSeleniumDriver {
         // check if element is selected (for checkboxes and radiobuttons)
         System.out.println(checkbox.isSelected());
 
+    }
+
+    @Test
+    public void handleDropdown() throws InterruptedException {
+        driver.get("https://the-internet.herokuapp.com/dropdown");
+
+        Select select = new Select(driver.findElement(By.id("dropdown")));
+        // select Option 2
+        select.selectByValue("2");
+
+        Thread.sleep(3000);
+        // select bu text
+        select.selectByVisibleText("Option 1");
+
+        Thread.sleep(3000);
+        // select by index
+        select.selectByIndex(2);
+
+    }
+
+    @Test
+    public void handleAlerts() throws InterruptedException {
+        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
+
+        Thread.sleep(2000);
+
+        List<WebElement> buttons = driver.findElements(By.xpath("//button"));
+
+
+        buttons.get(0).click();
+
+        Thread.sleep(2000);
+        // information alert
+        driver.switchTo().alert().accept();
+
+        Thread.sleep(1000);
+        // dismiss alert
+        buttons.get(1).click();
+
+        Thread.sleep(2000);
+        driver.switchTo().alert().dismiss();
+
+        Thread.sleep(2000);
+        // text alert
+
+        buttons.get(2).click();
+        Thread.sleep(2000);
+
+        driver.switchTo().alert().sendKeys("Hello alert");
+
+        driver.switchTo().alert().accept();
+
+    }
+
+    @Test
+    public void handleFrames() throws InterruptedException {
+        driver.get("https://the-internet.herokuapp.com/iframe");
+
+        Thread.sleep(3000);
+
+        // switch to frame
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
+
+        System.out.println(driver.findElement(By.xpath("//p")).getText());
     }
 
 
