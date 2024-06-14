@@ -3,7 +3,6 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
@@ -45,7 +44,6 @@ public class HomeworkTests {
         WebElement addressField = driver.findElement(By.xpath("//*[@id=\"address\"]"));
         WebElement passwordField = driver.findElement(By.xpath("//*[@id=\"password\"]"));
         WebElement submitButton = driver.findElement(By.xpath("//input[@type=\"submit\"]"));
-        Actions action =  new Actions(driver);
 
         fullNameField.sendKeys("Olesea Gamurari");
         emailField.sendKeys("email@orange.com");
@@ -63,8 +61,6 @@ public class HomeworkTests {
         WebElement expandMainLevelOne = driver.findElement(By.xpath("//*[@id=\"bs_1\"]/span[1]"));
         WebElement expandSubLevelTwo = driver.findElement(By.xpath("//*[@id=\"bf_2\"]/span[1]"));
         WebElement checkLastLevelEight = driver.findElement(By.xpath("//*[@id=\"c_io_8\"]"));
-
-        Actions action =  new Actions(driver);
 
         expandMainLevelOne.click();
         expandSubLevelTwo.click();
